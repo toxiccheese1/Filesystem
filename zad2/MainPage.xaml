@@ -4,11 +4,13 @@
              x:Class="zad2.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout Spacing="30" Margin="30">
             <Editor x:Name="InputEditor"/>
             <Button Text="Dodaj wpis" Clicked="Zapisz"/>
+            <Button Text="Wyczyść dziennik" Clicked="Usun"/>
             <Label x:Name="Label1" />
             <Label x:Name="Data" FontAttributes="Bold"/>
+
         </VerticalStackLayout>
     </ScrollView>
 

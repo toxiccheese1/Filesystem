@@ -10,19 +10,32 @@
 
         private void Zapisz(object sender, EventArgs e)
         {
-            DateTime dataiczas = DateTime.Now;
-            string tresc = InputEditor.Text;
             string sciezka = Path.Combine(FileSystem.Current.AppDataDirectory, "Dziennik.txt");
-            string text =  tresc + dataiczas.ToString("yyyy-MM-dd HH:mm:ss");
-            File.ReadAllText(sciezka, text);
+            string text = $"{InputEditor.Text} {System.DateTime.Now.ToString("dd.MM.yyyy HH.mm")}\n\n";
+            File.AppendAllText(sciezka, text);
             
             if(File.Exists(sciezka))
             {
-                Label1.Text = $"Zapisano: {text}";
+                Label1.Text = File.ReadAllText(sciezka);
             }
             else
             {
                 Label1.Text = $"Plik nie istnieje";
+            }
+        }
+
+        private void Usun(object sender, EventArgs e)
+        {
+            string sciezka = Path.Combine(FileSystem.Current.AppDataDirectory, "Dziennik.txt");
+            if (File.Exists(sciezka))
+            {
+                File.Delete(sciezka);
+                DisplayAlertAsync("Dziennik został usunięty", Title, "OK");
+                Label1.Text = $"";
+            }
+            else
+            {
+                DisplayAlertAsync("Dziennik nie istnieje", Title, "OK");
             }
         }
     }
